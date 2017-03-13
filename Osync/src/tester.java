@@ -8,8 +8,9 @@ import java.io.PrintWriter;
 import javax.swing.*;
 
 
-public class tester extends JPanel{
+public class tester extends JPanel  {
 	
+//Not sure what this is for, eclipse told me to put it in.
 	private static final long serialVersionUID = 3896634138026354101L;
 	
 	static String currentDir = ReadDir();
@@ -46,7 +47,7 @@ public class tester extends JPanel{
         add(directoryDisplay, gbc);
     }
     
-    public static void DirSearch ()	{
+    public static void DirSearch ()  {
     		JFileChooser fc = new JFileChooser();
     		fc.setCurrentDirectory(new java.io.File("C:/" ));
             fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -59,12 +60,9 @@ public class tester extends JPanel{
             tester.directoryDisplay.setText(dir);
             WriteDir(dir);  // writes directory to direct.txt
     }
-    
-    public static void WriteDir (String directory)	{
-	//This function writes the osu and music directories to the direct.txt file
-	//		directory: A string input which is the directory to record.
-		
-		try	{
+//writes the osu and music directories to the direct.txt file
+    public static void WriteDir (String directory)  {
+		try  {
 			FileWriter fw = new FileWriter ("direct.txt");
 			PrintWriter pw = new PrintWriter(fw);
 			pw.println(directory);
@@ -75,21 +73,22 @@ public class tester extends JPanel{
 			System.out.println("ERROR WRITING TO DIRECT.TXT");
 		}
 	}
-    
-	public static String ReadDir()	{
+	
+//Reads direct.txt to find last directory
+	public static String ReadDir()  {
 		String str;
 		
-		try {
+		try  {
 			FileReader fr = new FileReader("direct.txt");
 			BufferedReader br = new BufferedReader(fr);
 			
 			str=br.readLine();
 			br.close();
-			if (str !=null)	{
+			if (str !=null)  {
 				return str;
 			}
 			
-		} catch (IOException e) {
+		} catch (IOException e)  {
 			System.out.println("file not found");
 		}
 		
@@ -97,7 +96,7 @@ public class tester extends JPanel{
 		return "C:\\";
 	}
     
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
     	
     	tester t = new tester(); 
     	JFrame window = new JFrame ();
