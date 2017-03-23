@@ -15,21 +15,23 @@ public class Song {
     private final StringProperty artist;
     private final StringProperty album;
     private final StringProperty length;
+    private String location;
     
 
     //Default Constructor
     public Song() {
-    	this(null, null, null, null);
+    	this(null, null, null, null, null);
     }
     
     /**
      * Constructor with some initial data.
      */
-    public Song(String name, String artist, String album, String length) {
+    public Song(String name, String artist, String album, String length, String location) {
         this.name = new SimpleStringProperty(name);
         this.artist = new SimpleStringProperty(artist);
         this.album = new SimpleStringProperty(album);
         this.length = new SimpleStringProperty(length);
+        this.location = location;
     }
 
     public String getName() {
@@ -78,5 +80,12 @@ public class Song {
 
     public StringProperty lengthProperty() {
 		return length;
+    }
+    
+    public String getLocation() {
+        return location;
+    }
+    public void setlocation(String location) {
+        this.location = location;
     }
 }
