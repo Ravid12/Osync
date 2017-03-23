@@ -4,7 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import address.model.Song;
+import org.farng.mp3.MP3File;
+import org.farng.mp3.TagException;
+import org.farng.mp3.id3.ID3v1;
+import org.farng.mp3.id3.ID3v2_2;
+
+import address.model.*;
 import address.view.SongOverviewController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -22,10 +27,9 @@ public class MainApp extends Application {
     private ObservableList<Song> songData = FXCollections.observableArrayList();
 
     
-    public MainApp()  {
+    public MainApp() throws IOException, TagException  {
     	
-    	
-    	songData.add(new Song("Medusa In Chains", "The Fratellis", "Eyes Wide, Tounge Tied", "3:13"));
+    	getSongs(Directory.loadFromFile());
     	
     }
     
@@ -90,7 +94,7 @@ public class MainApp extends Application {
         }
     }
 
-    public void getSongs(String directoryName) {
+    public void getSongs(String directoryName) throws IOException, TagException {
         File directory = new File(directoryName);
         String fileName;
         String title, artist, album, length;
@@ -105,7 +109,15 @@ public class MainApp extends Application {
 /*TODO: get mp3 file details to add to songData.
 	If song Name is blank in OSU folder, use file name instead.
 */
-                songData.add(new Song(title, artist, album, length));
+            	
+            	MP3File mp3 = new MP3File(file);
+            	ID3v1 tag = mp3.getID3v1Tag();
+            	
+            	title = tag.getTitle();
+            	artist = tag.getArtist();
+            	album = tag.getAlbum();
+            	
+                songData.add(new Song(title, artist, album, "12"));
             } else if (file.isDirectory()) {
                 getSongs(file.getAbsolutePath());
             }
