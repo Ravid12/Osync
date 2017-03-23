@@ -117,7 +117,7 @@ public class MainApp extends Application {
             	artist = tag.getArtist();
             	album = tag.getAlbum();
             	
-                songData.add(new Song(title, artist, album, "12"));
+                songData.add(new Song(title, artist, album, "12", file.getAbsolutePath()));
             } else if (file.isDirectory()) {
                 getSongs(file.getAbsolutePath());
             }
